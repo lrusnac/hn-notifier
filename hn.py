@@ -6,6 +6,7 @@ import requests
 number_of_stories = 5
 base_url = 'https://hacker-news.firebaseio.com'
 passed_stories_file = 'old_stories.txt'
+stories_file = 'stories.txt'
 
 with open(passed_stories_file) as f:
     passed_stories = f.read().splitlines()
@@ -20,3 +21,5 @@ for s in best_x_stories:
         with open(passed_stories_file, 'a') as f:
             f.write(str(s) + '\n')
 
+        with open(stories_file, 'a') as f:
+            f.write(str(s) + '\n')
