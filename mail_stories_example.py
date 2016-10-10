@@ -14,7 +14,10 @@ mail = ""
 for s in meanwhile_stories:
 	story = requests.get(base_url + '/v0/item/'+str(s)+'.json').json()
 
-	msg = str(s) + '  -  ' + story['title'] + '  -  ' + story['url'] + "\n"
+	if 'url' in story:
+			msg = str(s) + '  -  ' + story['title'] + '  -  ' + story['url'] + '\n'
+	else:
+			msg = str(s) + ' - ' + story['title'] + '\n'
 	msg = msg.encode('utf-8')
 
 	mail = mail + msg
