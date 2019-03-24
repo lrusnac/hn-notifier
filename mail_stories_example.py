@@ -17,7 +17,7 @@ for s in meanwhile_stories:
 	if 'url' in story:
 			msg = str(s) + '  -  ' + story['title'] + '  -  ' + story['url'] + '\n'
 	else:
-			msg = str(s) + ' - ' + story['title'] + '\n'
+			msg = str(s) + ' - ' + story['title'] + ' - https://news.ycombinator.com/item?id=' + str(s) + '\n'
 	msg = msg.encode('utf-8')
 
 	mail = mail + msg
