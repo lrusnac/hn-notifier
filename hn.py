@@ -23,7 +23,7 @@ top_stories = response.json()[:NUM_STORIES]
 with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}') as f:
     read_stories = f.read().splitlines()[:100]
 
-new_top_stories = [story for story in top_stories if str(story) not in read_stories]
+new_top_stories = [str(story) for story in top_stories if str(story) not in read_stories]
 
 if len(new_top_stories) > 0:
     with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}', 'w') as f:
