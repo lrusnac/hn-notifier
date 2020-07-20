@@ -1,9 +1,10 @@
 import requests
+import json
 from google.oauth2 import service_account
 from fs.googledrivefs import GoogleDriveFS
 import os
 
-GOOGLE_DRIVE_SERVICE_ACCOUNT = os.environ.get('GOOGLE_DRIVE_SERVICE_ACCOUNT', '')
+GOOGLE_DRIVE_SERVICE_ACCOUNT = json.loads(os.environ.get('GOOGLE_DRIVE_SERVICE_ACCOUNT', ''))
 NUM_STORIES = 10
 BASE_URL_HN_API = 'https://hacker-news.firebaseio.com'
 
