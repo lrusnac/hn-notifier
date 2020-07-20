@@ -9,7 +9,7 @@ NUM_STORIES = 10
 BASE_URL_HN_API = 'https://hacker-news.firebaseio.com'
 
 READ_STORIES = 'read_stories'
-NEW_STORIES = 'to_read_stories'
+NEW_STORIES = 'new_stories'
 
 BASE_PATH_GOOGLE_DRIVE = 'datastores/hn/'
 
@@ -17,7 +17,7 @@ g_credentials = service_account.Credentials.from_service_account_info(GOOGLE_DRI
 fs = GoogleDriveFS(credentials=g_credentials)
 
 response = requests.get(f'{BASE_URL_HN_API}/v0/topstories.json')
-response.raiseon
+response.raise_for_status()
 top_stories = response.json()[:NUM_STORIES]
 
 with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}') as f:
