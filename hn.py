@@ -1,25 +1,32 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 0*0
-
 import requests
+from google.oauth2 import service_account
+from fs.googledrivefs import GoogleDriveFS
+import os
 
-number_of_stories = 5
-base_url = 'https://hacker-news.firebaseio.com'
-passed_stories_file = 'old_stories.txt'
-stories_file = 'stories.txt'
+GOOGLE_DRIVE_SERVICE_ACCOUNT = os.environment.get('GOOGLE_DRIVE_SERVICE_ACCOUNT', '')
+NUM_STORIES = 10
+BASE_URL_HN_API = 'https://hacker-news.firebaseio.com'
 
-with open(passed_stories_file) as f:
-    passed_stories = f.read().splitlines()
+READ_STORIES = 'read_stories'
+NEW_STORIES = 'to_read_stories'
 
-response = requests.get(base_url + '/v0/topstories.json')
-best_x_stories =  response.json()[0:number_of_stories]
+BASE_PATH_GOOGLE_DRIVE = 'datastores/hn/'
 
-for s in best_x_stories:
-    if str(s) not in passed_stories:
-        passed_stories.append(s)
-        
-        with open(passed_stories_file, 'a') as f:
-            f.write(str(s) + '\n')
+g_credentials = service_account.Credentials.from_service_account_info(GOOGLE_DRIVE_SERVICE_ACCOUNT)
+fs = GoogleDriveFS(credentials=g_credentials)
 
-        with open(stories_file, 'a') as f:
-            f.write(str(s) + '\n')
+response = requests.get(f'{BASE_URL_HN_API}/v0/topstories.json')
+response.raiseon
+top_stories = response.json()[:NUM_STORIES]
+
+with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}') as f:
+    read_stories = f.read().splitlines()[:100]
+
+new_top_stories = [story for story in top_stories if str(story) not in read_stories]
+
+if len(new_top_stories) > 0:
+    with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}', 'w') as f:
+        f.write('\n'.join(read_stories + new_top_stories))
+
+    with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}', 'a') as f:
+        f.write('\n'.join(new_top_stories) + '\n')
