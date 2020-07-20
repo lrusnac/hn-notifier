@@ -42,7 +42,7 @@ if mail_text is not '':
             'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
             'to': f'Leonid <{LEO_EMAIL}>',
             'subject': '[HN] new stories',
-            'text': mail
+            'text': mail_text
         }
     )
 

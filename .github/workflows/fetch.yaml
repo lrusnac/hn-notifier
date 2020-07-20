@@ -1,7 +1,6 @@
 name: Fetch new stories
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron:  '*/5 * * * *'

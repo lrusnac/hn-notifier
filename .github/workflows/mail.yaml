@@ -1,7 +1,6 @@
 name: Mail new stories
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron:  '2 11 * * *'
