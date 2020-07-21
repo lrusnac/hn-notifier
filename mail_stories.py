@@ -19,7 +19,6 @@ MAILGUN_SANDBOX = os.environ.get('MAILGUN_SANDBOX', '')
 g_credentials = service_account.Credentials.from_service_account_info(GOOGLE_DRIVE_SERVICE_ACCOUNT)
 fs = GoogleDriveFS(credentials=g_credentials)
 
-
 with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}') as f:
     new_stories = f.read().splitlines()
 
@@ -37,7 +36,7 @@ for story in new_stories:
 if mail_text != '':
     requests.post(
         f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/message',
-        auth={'api': MAILGUN_API_KEY},
+        auth=('api': MAILGUN_API_KEY),
         data={
             'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
             'to': f'Leonid <{LEO_EMAIL}>',
