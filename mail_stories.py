@@ -36,7 +36,7 @@ for story in new_stories:
 if mail_text != '':
     requests.post(
         f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/message',
-        auth=('api': MAILGUN_API_KEY),
+        auth=('api', MAILGUN_API_KEY),
         data={
             'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
             'to': f'Leonid <{LEO_EMAIL}>',
