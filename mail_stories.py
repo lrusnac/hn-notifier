@@ -34,7 +34,7 @@ for story in new_stories:
         mail_text += entry
 
 if mail_text != '':
-    requests.post(
+    response = requests.post(
         f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/message',
         auth=('api', MAILGUN_API_KEY),
         data={
@@ -44,6 +44,8 @@ if mail_text != '':
             'text': mail_text
         }
     )
+    
+    response.raise_for_status()
 
 with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}', 'w') as f:
     f.write('')
