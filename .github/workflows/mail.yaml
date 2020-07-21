@@ -3,7 +3,7 @@ name: Mail new stories
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '2 11 * * *'
+    - cron:  '5 11 * * *'
 
 jobs:
   build:
