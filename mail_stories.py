@@ -26,7 +26,7 @@ with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}') as f:
 mail_text = ''
 for story in new_stories:
     full_story = requests.get(f'{BASE_URL_HN_API}/v0/item/{story}.json').json()
-    if not full_story['deleted'] and 'deleted' not in full_story and 'title' in full_story:
+    if 'deleted' not in full_story and 'title' in full_story:
         if 'url' in story:
             entry = f'{story} - {full_story["title"]} - {full_story["url"]}\n'
         else:
