@@ -27,7 +27,7 @@ new_top_stories = [str(story) for story in top_stories if str(story) not in read
 
 if len(new_top_stories) > 0:
     with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{READ_STORIES}', 'w') as f:
-        f.write('\n'.join(read_stories + new_top_stories))
+        f.write('\n'.join(new_top_stories + read_stories))
 
     with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}', 'a') as f:
         f.write('\n'.join(new_top_stories) + '\n')
