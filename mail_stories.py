@@ -37,7 +37,7 @@ if mail_text != '':
     print(mail_text)
     
     response = requests.post(
-        f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/message',
+        f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/messages',
         auth=('api', MAILGUN_API_KEY),
         data={
             'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
