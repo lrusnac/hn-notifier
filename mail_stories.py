@@ -26,7 +26,7 @@ mail_text = ''
 for story in new_stories:
     full_story = requests.get(f'{BASE_URL_HN_API}/v0/item/{story}.json').json()
     if 'deleted' not in full_story and 'title' in full_story:
-        if 'url' in story:
+        if 'url' in full_story:
             entry = f'{story} - {full_story["title"]} - {full_story["url"]}\n'
         else:
             entry = f'{story} - {full_story["title"]} - https://news.ycombinator.com/item?id={story}\n'
