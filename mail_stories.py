@@ -51,7 +51,7 @@ if mail_text != '':
 #     response.raise_for_status()
     
     response = requests.post(
-        f'https://api.mailjet.com/v3.1/send',
+        'https://api.mailjet.com/v3.1/send',
         auth=(MAILJET_KEY, MAILJET_SECRET),
         json={
             'Messages': [{
@@ -68,8 +68,9 @@ if mail_text != '':
             }]
         }
     )
-    
+
     response.raise_for_status()
 
+    
 with fs.open(f'{BASE_PATH_GOOGLE_DRIVE}{NEW_STORIES}', 'w') as f:
     f.write('')
