@@ -53,7 +53,7 @@ if mail_text != '':
     response = requests.post(
         f'https://api.mailjet.com/v3.1/send',
         auth=(MAILJET_KEY, MAILJET_SECRET),
-        data={
+        json={
             'Messages': [{
                 'From': {
                     'Email': LEO_EMAIL,
