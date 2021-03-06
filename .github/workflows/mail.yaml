@@ -29,7 +29,7 @@ jobs:
       env:
         GOOGLE_DRIVE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
         LEO_EMAIL: ${{ secrets.LEO_EMAIL }}
-        MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-        MAILGUN_SANDBOX: ${{ secrets.MAILGUN_SANDBOX }}
+        MAILJET_KEY: ${{ secrets.MAILJET_KEY }}
+        MAILJET_SECRET: ${{ secrets.MAILJET_SECRET }}
       run: |-
         python mail_stories.py
