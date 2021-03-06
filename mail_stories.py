@@ -12,8 +12,8 @@ NEW_STORIES = 'new_stories'
 BASE_PATH_GOOGLE_DRIVE = 'datastores/hn/'
 
 LEO_EMAIL = os.environ.get('LEO_EMAIL', '')
-MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
-MAILGUN_SANDBOX = os.environ.get('MAILGUN_SANDBOX', '')
+# MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
+# MAILGUN_SANDBOX = os.environ.get('MAILGUN_SANDBOX', '')
 MAILJET_KEY = os.environ.get('MAILJET_KEY', '')
 MAILJET_SECRET = os.environ.get('MAILJET_SECRET', '')
 
@@ -37,18 +37,18 @@ for story in new_stories:
 if mail_text != '':
     print(mail_text)
     
-    response = requests.post(
-        f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/messages',
-        auth=('api', MAILGUN_API_KEY),
-        data={
-            'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
-            'to': f'Leonid <{LEO_EMAIL}>',
-            'subject': '[HN] new stories',
-            'text': mail_text
-        }
-    )
+#     response = requests.post(
+#         f'https://api.mailgun.net/v3/{MAILGUN_SANDBOX}.mailgun.org/messages',
+#         auth=('api', MAILGUN_API_KEY),
+#         data={
+#             'from': f'HN notifier <postmaster@{MAILGUN_SANDBOX}.mailgun.org>',
+#             'to': f'Leonid <{LEO_EMAIL}>',
+#             'subject': '[HN] new stories',
+#             'text': mail_text
+#         }
+#     )
     
-    response.raise_for_status()
+#     response.raise_for_status()
     
     response = requests.post(
         f'https://api.mailjet.com/v3.1/send',
