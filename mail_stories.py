@@ -14,6 +14,8 @@ BASE_PATH_GOOGLE_DRIVE = 'datastores/hn/'
 LEO_EMAIL = os.environ.get('LEO_EMAIL', '')
 MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY', '')
 MAILGUN_SANDBOX = os.environ.get('MAILGUN_SANDBOX', '')
+MAILJET_KEY = os.environ.get('MAILJET_KEY', '')
+MAILJET_SECRET = os.environ.get('MAILJET_SECRET', '')
 
 g_credentials = service_account.Credentials.from_service_account_info(GOOGLE_DRIVE_SERVICE_ACCOUNT)
 fs = GoogleDriveFS(credentials=g_credentials)
@@ -43,6 +45,27 @@ if mail_text != '':
             'to': f'Leonid <{LEO_EMAIL}>',
             'subject': '[HN] new stories',
             'text': mail_text
+        }
+    )
+    
+    response.raise_for_status()
+    
+    response = requests.post(
+        f'https://api.mailjet.com/v3.1/send',
+        auth=(MAILJET_KEY, MAILJET_SECRET),
+        data={
+            'Messages': [{
+                'From': {
+                    'Email': LEO_EMAIL,
+                    'Name': 'HN notifier'
+                },
+                'To': [{
+                    'Email': LEO_EMAIL,
+                    'Name': 'Leo'
+                }],
+                'Subject': '[HN] new stories',
+                'TextPart': mail_text
+            }]
         }
     )
     
