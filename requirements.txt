@@ -1,3 +1,4 @@
 requests
 fs.googledrivefs==2.6.1
 google-api-python-client==2.190.0
+setuptools
